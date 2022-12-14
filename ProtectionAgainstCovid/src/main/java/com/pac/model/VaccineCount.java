@@ -13,4 +13,5 @@ public class VaccineCount {
 //	@OneToMany
 //	private Vaccine vaccine;
 //	
+//	private VaccineInventory vaccineInventory;
 }
