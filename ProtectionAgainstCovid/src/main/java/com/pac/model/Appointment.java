@@ -1,32 +1,39 @@
 package com.pac.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Vaccine {
+@AllArgsConstructor
+public class Appointment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer vaccineId;
-	@NotNull(message = "{notnull.mesage}")
-	private String vaccineName;
-	@NotNull(message = "{notnull.mesage}")
-	private String description;;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	private Member member;
+	private Long bookingId;
 	
+	private Long mobileNo;
+	
+	private LocalDate dateOfBooking;
+	
+	private Boolean bookingstats;
+	
+//	private Slot slot;
+	
+//	@OneToOne(cascade = CascadeType.ALL)
+//	private Member member;
 	
 	
 	
