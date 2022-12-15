@@ -1,5 +1,7 @@
 package com.pac.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +36,7 @@ class VaccinationCenter {
 	private String pincode;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private Appointment appointment;
+	private List<Appointment> appointments;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private VaccineInventory vaccineInventory;

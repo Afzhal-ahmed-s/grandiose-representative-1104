@@ -30,13 +30,14 @@ public class Appointment {
 	
 	private Boolean bookingstats;
 	
-//	private Slot slot;
+	//private Slot slot;
 	
 //	@OneToOne(cascade = CascadeType.ALL)
 //	private Member member;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private VaccinationCenter vaccinationCenter;
 
-	
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Member member;
 }
