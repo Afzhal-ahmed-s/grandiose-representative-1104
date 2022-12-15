@@ -34,10 +34,10 @@ public class Member {
 	private IdCard idCard;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private VaccineRegistration vaccineRegistration;
+	private List<VaccineRegistration> vaccineRegistration;
 	
 	@OneToMany(cascade = CascadeType.ALL)
-	private Vaccine vaccine;
+	private List<Vaccine> vaccine;
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Appointment> appointments;
