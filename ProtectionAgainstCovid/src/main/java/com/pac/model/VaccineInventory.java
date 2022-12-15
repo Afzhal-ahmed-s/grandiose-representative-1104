@@ -3,6 +3,7 @@ package com.pac.model;
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -20,4 +21,7 @@ public class VaccineInventory {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private VaccinationCenter vaccinationCenter;
+	
+	@Embedded
+	private VaccineCount vaccineCount;
 }

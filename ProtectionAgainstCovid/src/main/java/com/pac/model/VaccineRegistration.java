@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,8 +32,11 @@ public class VaccineRegistration {
 	private LocalDate dateOfRegsitration;
 
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<Member>members;
+//	@OneToMany(cascade = CascadeType.ALL)
+//	@JsonIgnore
+//	private List<Member>members;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Member members;
 	
 }

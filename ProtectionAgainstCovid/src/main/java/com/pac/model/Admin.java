@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -33,7 +34,21 @@ public class Admin {
 	@NotNull(message = "{notnull.mesage}")
 	@NotEmpty
 	private String password;
+	@Size(max = 10,min = 10)
+	private String mobileNo;
+	
+	public Admin(@NotNull(message = "{notnull.mesage}") @NotEmpty @NotEmpty String name,
+			@NotNull(message = "{notnull.mesage}") @Email(message = "Please enter valid email") String email,
+			@NotNull(message = "{notnull.mesage}") @NotEmpty String password,
+			@Size(max = 10, min = 10) String mobileNo) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.mobileNo = mobileNo;
+	}
 
+	
 
 	
 }
