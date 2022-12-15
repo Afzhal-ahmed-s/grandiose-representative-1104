@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@Getter
 public class VaccineRegistration {
 
 	@Id
@@ -38,5 +40,36 @@ public class VaccineRegistration {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Member members;
+
+
+	public Long getMobileNo() {
+		return mobileNo;
+	}
+
+
+	public void setMobileNo(Long mobileNo) {
+		this.mobileNo = mobileNo;
+	}
+
+
+	public LocalDate getDateOfRegsitration() {
+		return dateOfRegsitration;
+	}
+
+
+	public void setDateOfRegsitration(LocalDate dateOfRegsitration) {
+		this.dateOfRegsitration = dateOfRegsitration;
+	}
+
+
+	public Member getMembers() {
+		return members;
+	}
+
+
+	public void setMembers(Member members) {
+		this.members = members;
+	}
+	
 	
 }
