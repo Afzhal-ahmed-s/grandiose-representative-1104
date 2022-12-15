@@ -41,3 +41,5 @@ class VaccinationCenter {
 	@OneToOne(cascade = CascadeType.ALL)
 	private VaccineInventory vaccineInventory;
 }
+
+//test
