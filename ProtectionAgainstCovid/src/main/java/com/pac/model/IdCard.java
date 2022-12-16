@@ -43,6 +43,6 @@ public class IdCard {
 	@Embedded
 	private PanCard panCard;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "idCard")
-	private Member member;
+	//@OneToOne(cascade = CascadeType.ALL)
+	//private Member member;
 }
