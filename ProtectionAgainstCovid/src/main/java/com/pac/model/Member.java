@@ -38,6 +38,7 @@ public class Member {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Vaccine vaccine;
+
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Appointment> appointments;
