@@ -1,17 +1,16 @@
 package com.pac.serviceImplementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pac.dao.UserDao;
 import com.pac.dao.UserSessionDao;
-import com.pac.excpetion.AdminException;
 import com.pac.excpetion.UserException;
-import com.pac.model.Admin;
-import com.pac.model.CurrentAdminSession;
 import com.pac.model.CurrentUserSession;
 import com.pac.model.User;
 import com.pac.service.UserService;
 
+@Service
 public class UserServiceImplementation implements UserService{
 
 	@Autowired

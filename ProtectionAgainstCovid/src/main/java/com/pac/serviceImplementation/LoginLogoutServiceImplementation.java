@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pac.dao.AdminDao;
 import com.pac.dao.AdminSessionDao;
@@ -21,6 +22,7 @@ import com.pac.service.LogInLogOutService;
 
 import net.bytebuddy.utility.RandomString;
 
+@Service
 public class LoginLogoutServiceImplementation implements LogInLogOutService{
 
 	@Autowired
@@ -36,7 +38,7 @@ public class LoginLogoutServiceImplementation implements LogInLogOutService{
 	private UserSessionDao userSessionDao;
 
 	@Override
-	public String logUser(UserLogin dto) throws LoginException {
+	public String loginUser(UserLogin dto) throws LoginException {
 
 		User existingUser = userDao.findByMobileNo(dto.getMobileNo());
 		
@@ -71,7 +73,7 @@ public class LoginLogoutServiceImplementation implements LogInLogOutService{
 	}
 
 	@Override
-	public String logIntoAdmin(AdminLogin dto) throws LoginException {
+	public String logInAdmin(AdminLogin dto) throws LoginException {
 		Admin existingAdmin = adminDao.findByMobileNo(dto.getMobileNo());
 		
 		

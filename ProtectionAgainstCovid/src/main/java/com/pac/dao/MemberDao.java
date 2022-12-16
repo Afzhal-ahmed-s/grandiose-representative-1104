@@ -10,9 +10,9 @@ import com.pac.model.Member;
 public interface MemberDao extends JpaRepository<Member, Integer>{
 
 	@Query("select m from Member m where m.idCard.id=(select i.id from IdCard i where i.aadharCard.aadharNo= ?1)")
-	public Member getMemeberByAadharNo(Integer aadharNo);
+	public Member getMemeberByAadharNo(String aadharNo);
 	
 	@Query("select m from Member m where m.idCard.id=(select i.id from IdCard i where i.panCard.panNo= ?1)")
-	public Member getMemeberByPanNo(Integer panNo);
+	public Member getMemeberByPanNo(String panNo);
 
 }

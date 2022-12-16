@@ -6,11 +6,11 @@ import com.pac.model.UserLogin;
 
 public interface LogInLogOutService {
 	
-	public String logUser(UserLogin dto)throws LoginException;
+	public String loginUser(UserLogin dto)throws LoginException;
 
 	public String logOutUser(String key)throws LoginException;
 	
-	public String logIntoAdmin(AdminLogin adl) throws LoginException;
+	public String logInAdmin(AdminLogin adl) throws LoginException;
 	
 	public String logOutAdmin(String key) throws LoginException;
 
