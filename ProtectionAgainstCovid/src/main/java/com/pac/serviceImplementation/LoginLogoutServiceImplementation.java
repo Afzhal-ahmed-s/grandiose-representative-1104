@@ -93,7 +93,7 @@ public class LoginLogoutServiceImplementation implements LogInLogOutService{
 			
 		}
 		else throw new LoginException("Sign-up as a Admin to log-in as a admin.");
-		return "Admin logged in successfully.";
+		return "Admin "+existingAdmin.getName() +" logged in successfully.";
 	}
 
 	@Override

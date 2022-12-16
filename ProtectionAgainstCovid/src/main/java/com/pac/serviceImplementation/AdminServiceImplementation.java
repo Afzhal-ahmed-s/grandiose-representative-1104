@@ -22,23 +22,31 @@ public class AdminServiceImplementation implements AdminService{
 	@Override
 	public Admin createAdmin(Admin admin) throws AdminException {
 
-		//&& adminDao.findByEmail(admin.getEmail()) ==null  adminDao.findByMobileNo(admin.getMobileNo()) ==null && 
 		//double check
 		if(adminDao.findByEmail(admin.getEmail()).size()==0 && adminDao.findByMobileNo(admin.getMobileNo()) ==null) {
 			return adminDao.save(admin);
 		}
-		else throw new AdminException("A Admin already exists with the same mobile number or emailId. Please give any other credentials.");
+		else throw new AdminException("An Admin already exists with the same mobile number or emailId. Please give any other credentials.");
 	}
 
 	@Override
 	public Admin updateAdmin(Admin admin, String key) throws AdminException {
 
 		CurrentAdminSession currentAdminSession = adminSessionDao.findByUniqueUserId(key);
-		
+
 		if(currentAdminSession != null) {
 			Admin existingAdmin = adminDao.findByMobileNo(admin.getMobileNo());
 				if(existingAdmin != null) {
-					return adminDao.save(admin);
+					admin.setAdminId(existingAdmin.getAdminId());
+
+					if(admin.getEmail() != null)existingAdmin.setEmail(admin.getEmail());
+					if(admin.getMobileNo() != null)existingAdmin.setMobileNo(admin.getMobileNo());
+					if(admin.getName() != null)existingAdmin.setName(admin.getName());
+					if(admin.getPassword() != null)existingAdmin.setPassword(admin.getPassword());
+
+					
+					return adminDao.save(existingAdmin);
+
 				}
 				else throw new AdminException("No such admin exists. Please supply valid admin profile to update it.");
 		}
