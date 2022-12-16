@@ -33,10 +33,10 @@ public class Member {
 	@OneToOne(cascade = CascadeType.ALL)
 	private IdCard idCard;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private VaccineRegistration vaccineRegistration;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Vaccine vaccine;
 	
 	@OneToMany(cascade = CascadeType.ALL)
