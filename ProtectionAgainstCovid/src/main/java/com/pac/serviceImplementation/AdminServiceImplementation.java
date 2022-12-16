@@ -22,11 +22,12 @@ public class AdminServiceImplementation implements AdminService{
 	@Override
 	public Admin createAdmin(Admin admin) throws AdminException {
 
+		//&& adminDao.findByEmail(admin.getEmail()) ==null  adminDao.findByMobileNo(admin.getMobileNo()) ==null && 
 		//double check
-		if(adminDao.findByMobileNo(admin.getMobileNo())==null && adminDao.findByEmail(admin.getEmail())==null) {
+		if(adminDao.findByEmail(admin.getEmail()).size()==0 && adminDao.findByMobileNo(admin.getMobileNo()) ==null) {
 			return adminDao.save(admin);
 		}
-		else throw new AdminException("This Admin account already exists");
+		else throw new AdminException("A Admin already exists with the same mobile number or emailId. Please give any other credentials.");
 	}
 
 	@Override
