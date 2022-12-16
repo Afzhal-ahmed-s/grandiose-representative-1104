@@ -17,9 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VaccineInventory {
-	
-	@Id
-	private Integer inventoryId;
 
 	@Id
 	private Integer inventoryId;
