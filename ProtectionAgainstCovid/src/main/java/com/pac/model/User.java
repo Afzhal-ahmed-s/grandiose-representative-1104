@@ -31,17 +31,24 @@ public class User {
 	private String mobileNo;
 	@NotNull(message = "Password is mandatory")
 	private String password;
-	@Email
+	@Email(message = "Email is mandatory")
 	private String email;
 	
-	public User(@NotNull(message = "Name is mandatory") String name, @Size(max = 10, min = 10) String mobileNo,
-			@NotNull(message = "Password is mandatory") String password, @Email String email) {
+//	public User(@NotNull(message = "Name is mandatory") String name, @Size(max = 10, min = 10) String mobileNo,
+//			@NotNull(message = "Password is mandatory") String password, @Email String email) {
+//		super();
+//		this.name = name;
+//		this.mobileNo = mobileNo;
+//		this.password = password;
+//		this.email = email;
+//	}
+	
+	public User(String name,String mobileNo,String password,String email) {
 		super();
 		this.name = name;
 		this.mobileNo = mobileNo;
 		this.password = password;
 		this.email = email;
 	}
-	
 	
 }

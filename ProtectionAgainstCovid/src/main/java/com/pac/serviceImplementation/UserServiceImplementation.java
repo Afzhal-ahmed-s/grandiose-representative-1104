@@ -34,11 +34,18 @@ public class UserServiceImplementation implements UserService{
 	public User updateUser(User user, String key) throws UserException {
 
 		CurrentUserSession currentUserSession = userSessionDao.findByUniqueUserId(key);
-		
+		System.out.println("Check 1: "+ key);
 		if(currentUserSession != null) {
-			User existingAdmin = userDao.findByMobileNo(user.getMobileNo());
-				if(existingAdmin != null) {
-					return userDao.save(user);
+			User existingUser =userDao.findByMobileNo(user.getMobileNo());
+				if(existingUser != null) {
+					
+					if(user.getEmail() != null)existingUser.setEmail(user.getEmail());
+//					if(user.getMobileNo() != null)existingUser.setMobileNo(user.getMobileNo());
+					if(user.getName() != null)existingUser.setName(user.getName());
+					if(user.getPassword() != null)existingUser.setPassword(user.getPassword());
+					System.out.println("Check 2: "+ existingUser);
+
+					return userDao.save(existingUser);
 				}
 				else throw new UserException("No such User exists. Please supply valid user profile to update it.");
 		}

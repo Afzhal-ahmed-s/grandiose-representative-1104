@@ -37,7 +37,6 @@ public class AdminServiceImplementation implements AdminService{
 		if(currentAdminSession != null) {
 			Admin existingAdmin = adminDao.findByMobileNo(admin.getMobileNo());
 				if(existingAdmin != null) {
-					admin.setAdminId(existingAdmin.getAdminId());
 
 					if(admin.getEmail() != null)existingAdmin.setEmail(admin.getEmail());
 					if(admin.getMobileNo() != null)existingAdmin.setMobileNo(admin.getMobileNo());

@@ -1,10 +1,12 @@
 package com.pac.controller;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,13 +30,13 @@ public class UserController {
 	private UserSessionDao userSessionDao;
 	
 	@PostMapping("/signUp")
-	public ResponseEntity<User> signUpUser(@RequestBody User user) throws UserException{
+	public ResponseEntity<User> signUpUser(@Valid @RequestBody User user) throws UserException{
 		User signedUpUser = userService.createUser(user);
 		return new ResponseEntity<User>(signedUpUser, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/updateUser/{uuidKey}")
-	public ResponseEntity<User> updateUser(@RequestBody User user, @PathParam("uuidKey")String key) throws UserException{
+	@PutMapping("/profileUpdate/{uuidKey}")
+	public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("uuidKey")String key) throws UserException{
 		User updatedUser = userService.updateUser(user, key);
 		return new ResponseEntity<User>(updatedUser, HttpStatus.ACCEPTED);
 	}
