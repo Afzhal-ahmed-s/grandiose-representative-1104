@@ -7,8 +7,13 @@ import javax.management.BadAttributeValueExpException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.pac.dao.AdminSessionDao;
+import com.pac.dao.MemberDao;
 import com.pac.dao.VaccineRegistrationDao;
+import com.pac.excpetion.AdminLoginException;
+import com.pac.excpetion.MemberException;
 import com.pac.excpetion.VaccineRegistrationException;
+import com.pac.model.CurrentAdminSession;
 import com.pac.model.Member;
 import com.pac.model.VaccineRegistration;
 import com.pac.service.VaccineRegistrationService;
@@ -19,17 +24,24 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	@Autowired
 	private VaccineRegistrationDao daoVacRegistration;
 	
-//	@Autowired
-//	private AdminLoginDao daoAdminLogin;
-//	
-//	@Autowired
-//	private MemberLoginDao daoMemberLogin;
+	@Autowired
+	private AdminSessionDao adminDao ;
+//
+	@Autowired
+	private MemberDao memberDao;
 	
 
 	
 	@Override
-	public VaccineRegistration getVaccineRegistration(Long mobileNumber) throws VaccineRegistrationException {
+	public VaccineRegistration getVaccineRegistration(Long mobileNumber,Integer memberId) throws VaccineRegistrationException,MemberException {
 		      
+		
+		Optional<Member> member = memberDao.findById(memberId);
+		
+        if(!member.isPresent()) {
+        	throw new MemberException("Member not found");
+        }
+        
 		Optional<VaccineRegistration> optRegis= daoVacRegistration.findById(mobileNumber);
 	    
 	    if(optRegis.isPresent())
@@ -40,9 +52,13 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 		    
 	}
 	@Override
-	public Member getAllMember(Long mobileNumber) throws VaccineRegistrationException {
+	public Member getAllMember(Long mobileNumber,Integer adminId) throws VaccineRegistrationException,AdminLoginException {
 
-
+		Optional<CurrentAdminSession> adminSession = adminDao.findById(adminId);
+		if(!adminSession.isPresent()) {
+			throw new AdminLoginException("Login first");
+		}
+		
 		Optional<VaccineRegistration> opt = daoVacRegistration.findById(mobileNumber);
 		
 		if(opt.isPresent()) {
@@ -57,9 +73,16 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	}
 	
 	@Override
-	public VaccineRegistration addVaccineRegistration(VaccineRegistration registration) throws VaccineRegistrationException {
+	public VaccineRegistration addVaccineRegistration(VaccineRegistration registration,Integer memberId) throws VaccineRegistrationException, MemberException {
 		 
 		//Login the members first
+		
+		Optional<Member> member = memberDao.findById(memberId);
+		
+        if(!member.isPresent()) {
+        	throw new MemberException("Member not found");
+        }
+        
 		
 		 VaccineRegistration registraionDone=daoVacRegistration.save(registration);
 	    
@@ -68,8 +91,13 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	}
 	
 	@Override
-	public VaccineRegistration updateVaccineRegistration(VaccineRegistration registration) throws VaccineRegistrationException {
-		            
+	public VaccineRegistration updateVaccineRegistration(VaccineRegistration registration, Integer memberId) throws VaccineRegistrationException,MemberException {
+		 
+		Optional<Member> member = memberDao.findById(memberId);
+		
+        if(!member.isPresent()) {
+        	throw new MemberException("Member not found");
+        }
 
 		Optional<VaccineRegistration> optRegis= daoVacRegistration.findById(registration.getMobileNo());
         
@@ -84,9 +112,15 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	}
 	
 	@Override
-	public boolean deleteVaccineRegistration(VaccineRegistration registration) throws VaccineRegistrationException {
+	public boolean deleteVaccineRegistration(VaccineRegistration registration,Integer memberId) throws VaccineRegistrationException,MemberException{
 		     
 
+		Optional<Member> member = memberDao.findById(memberId);
+		
+        if(!member.isPresent()) {
+        	throw new MemberException("Member not found");
+        }
+		
 		Optional<VaccineRegistration> optRegisDelete= daoVacRegistration.findById(registration.getMobileNo());
         
         if(!optRegisDelete.isPresent())

@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.pac.excpetion.AdminException;
+import com.pac.excpetion.AdminLoginException;
+import com.pac.excpetion.MemberException;
 import com.pac.excpetion.VaccineRegistrationException;
 import com.pac.model.Member;
 import com.pac.model.VaccineRegistration;
@@ -12,15 +15,15 @@ import com.pac.model.VaccineRegistration;
 public interface VaccineRegistrationService {
 
 
-	public VaccineRegistration getVaccineRegistration(Long mobileNumber) throws VaccineRegistrationException;
+	public VaccineRegistration getVaccineRegistration(Long mobileNumber,Integer memberId) throws VaccineRegistrationException,MemberException;
 
-	public Member getAllMember(Long mobileNumber) throws VaccineRegistrationException ;
+	public Member getAllMember(Long mobileNumber,Integer adminId) throws VaccineRegistrationException,AdminLoginException ;
 
-	public VaccineRegistration addVaccineRegistration(VaccineRegistration registration) throws VaccineRegistrationException;
+	public VaccineRegistration addVaccineRegistration(VaccineRegistration registration,Integer memberId) throws VaccineRegistrationException,MemberException;
 	
-	public VaccineRegistration updateVaccineRegistration(VaccineRegistration registration) throws VaccineRegistrationException;
+	public VaccineRegistration updateVaccineRegistration(VaccineRegistration registration,Integer memberId) throws VaccineRegistrationException,MemberException;
 
-	public boolean deleteVaccineRegistration(VaccineRegistration registration) throws VaccineRegistrationException;
+	public boolean deleteVaccineRegistration(VaccineRegistration registration,Integer memberId) throws VaccineRegistrationException,MemberException;
 
 	
 }
