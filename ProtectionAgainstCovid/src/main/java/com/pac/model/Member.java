@@ -33,11 +33,12 @@ public class Member {
 	@OneToOne(cascade = CascadeType.ALL)
 	private IdCard idCard;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<VaccineRegistration> vaccineRegistration;
+	@OneToOne(cascade = CascadeType.ALL)
+	private VaccineRegistration vaccineRegistration;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Vaccine> vaccine;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Vaccine vaccine;
+
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	private List<Appointment> appointments;
