@@ -21,6 +21,8 @@ public class VaccineInventory {
 	@Id
 	private Integer inventoryId;
 
+	@Id
+	private Integer inventoryId;
 	private LocalDate date;
 	
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "vaccineInventory")
