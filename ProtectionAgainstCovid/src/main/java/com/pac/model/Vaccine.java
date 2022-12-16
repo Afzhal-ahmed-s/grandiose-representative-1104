@@ -29,8 +29,8 @@ public class Vaccine {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Member member;
 	
-	//@ManyToOne(cascade = CascadeType.ALL)
-	//private VaccineInventory vaccineInventory;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private VaccineInventory vaccineInventory;
 	
 	@Embedded
 	private VaccineCount vaccineCount;
