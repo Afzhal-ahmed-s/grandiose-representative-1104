@@ -27,8 +27,8 @@ public class UserController {
 	@Autowired
 	private UserSessionDao userSessionDao;
 	
-	@PostMapping("signUp")
-	public ResponseEntity<User> signUpUser(@RequestParam User user) throws UserException{
+	@PostMapping("/signUp")
+	public ResponseEntity<User> signUpUser(@RequestBody User user) throws UserException{
 		User signedUpUser = userService.createUser(user);
 		return new ResponseEntity<User>(signedUpUser, HttpStatus.CREATED);
 	}

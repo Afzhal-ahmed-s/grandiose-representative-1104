@@ -23,10 +23,10 @@ public class UserServiceImplementation implements UserService{
 	public User createUser(User user) throws UserException {
 
 		//double check
-				if(userDao.findByMobileNo(user.getMobileNo())==null && userDao.findByEmail(user.getEmail())==null) {
+				if(userDao.findByMobileNo(user.getMobileNo())==null && userDao.findByEmail(user.getEmail()).size()==0) {
 					return userDao.save(user);
 				}
-				else throw new UserException("This User account already exists");
+				else throw new UserException("A User already exists with the same mobile number or emailId. Please give any other credentials.");
 
 	}
 
