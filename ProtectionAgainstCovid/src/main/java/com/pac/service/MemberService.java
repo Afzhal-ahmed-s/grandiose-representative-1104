@@ -13,7 +13,7 @@ public interface MemberService {
 
 	public Member getMemberById(Integer memberId, String key) throws MemberException, LoginException;
 
-	public Member getMemberByAadharNo(Long aadharNo, String key) throws MemberException, LoginException;
+	public Member getMemberByAadharNo(String aadharNo, String key) throws MemberException, LoginException;
 
 	public Member getMemberByPanNo(String panNo, String key) throws MemberException, LoginException;
 

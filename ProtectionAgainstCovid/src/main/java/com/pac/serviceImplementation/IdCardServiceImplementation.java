@@ -3,6 +3,7 @@ package com.pac.serviceImplementation;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pac.dao.IdCardDao;
 import com.pac.dao.UserSessionDao;
@@ -12,6 +13,7 @@ import com.pac.model.CurrentUserSession;
 import com.pac.model.IdCard;
 import com.pac.service.IdCardService;
 
+@Service
 public class IdCardServiceImplementation implements IdCardService{
 
 	@Autowired

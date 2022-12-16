@@ -1,6 +1,7 @@
 package com.pac.serviceImplementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pac.dao.AdminDao;
 import com.pac.dao.AdminSessionDao;
@@ -9,6 +10,7 @@ import com.pac.model.Admin;
 import com.pac.model.CurrentAdminSession;
 import com.pac.service.AdminService;
 
+@Service
 public class AdminServiceImplementation implements AdminService{
 
 	@Autowired
