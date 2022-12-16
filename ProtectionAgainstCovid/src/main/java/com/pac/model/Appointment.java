@@ -36,7 +36,6 @@ public class Appointment {
 //	private Member member;
 	
 	@ManyToOne(cascade = CascadeType.ALL)
-	//@OneToOne(cascade = CascadeType.ALL)
 	private VaccinationCenter vaccinationCenter;
 
 	@ManyToOne(cascade = CascadeType.ALL)

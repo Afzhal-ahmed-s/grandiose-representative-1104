@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
@@ -17,6 +18,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class VaccineInventory {
 
+	@Id
+	private Integer inventoryId;
 	private LocalDate date;
 	
 //	@OneToOne(cascade = CascadeType.ALL, mappedBy = "vaccineInventory")
