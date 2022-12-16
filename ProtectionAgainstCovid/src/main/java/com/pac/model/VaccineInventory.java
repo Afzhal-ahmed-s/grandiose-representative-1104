@@ -22,7 +22,7 @@ public class VaccineInventory {
 	private Integer inventoryId;
 	private LocalDate date;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "vaccineInventory")
 	private VaccinationCenter vaccinationCenter;
 	
 	@Embedded

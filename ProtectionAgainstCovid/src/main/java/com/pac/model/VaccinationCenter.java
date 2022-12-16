@@ -13,13 +13,15 @@ import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class VaccinationCenter {
+@Getter
+public class VaccinationCenter {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,6 +42,71 @@ class VaccinationCenter {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private VaccineInventory vaccineInventory;
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
+		this.code = code;
+	}
+
+	public String getCenterName() {
+		return centerName;
+	}
+
+	public void setCenterName(String centerName) {
+		this.centerName = centerName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getPincode() {
+		return pincode;
+	}
+
+	public void setPincode(String pincode) {
+		this.pincode = pincode;
+	}
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
+	public VaccineInventory getVaccineInventory() {
+		return vaccineInventory;
+	}
+
+	public void setVaccineInventory(VaccineInventory vaccineInventory) {
+		this.vaccineInventory = vaccineInventory;
+	}
+	
 }
 
 //test
