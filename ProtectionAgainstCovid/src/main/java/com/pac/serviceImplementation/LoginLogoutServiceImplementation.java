@@ -63,6 +63,7 @@ public class LoginLogoutServiceImplementation implements LogInLogOutService{
 
 	@Override
 	public String logOutUser(String key) throws LoginException {
+		System.out.println("Check: "+key);
 
 		CurrentUserSession currentUserSession = userSessionDao.findByUniqueUserId(key);
 		if(currentUserSession != null) {

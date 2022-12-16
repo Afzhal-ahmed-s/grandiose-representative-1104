@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,12 +41,12 @@ public class LoginLogoutController {
 	}
 	
 	@DeleteMapping("/adminLogout/{key}")
-	public ResponseEntity<String> adminLogout(@PathParam(value = "key") String key) throws LoginException{
+	public ResponseEntity<String> adminLogout(@PathVariable(value = "key") String key) throws LoginException{
 		return  new ResponseEntity<String>(logInLogOutService.logOutAdmin(key), HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("/userLogout/{key}")
-	public ResponseEntity<String> userLogout(@PathParam(value = "key") String key) throws LoginException{
+	public ResponseEntity<String> userLogout(@PathVariable(value = "key") String key) throws LoginException{
 		return  new ResponseEntity<String>(logInLogOutService.logOutUser(key), HttpStatus.ACCEPTED);
 	}
 	
