@@ -31,6 +31,19 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	private MemberDao memberDao;
 	
 
+	@Override
+	public List<VaccineRegistration> getAllVaccineRegistration() throws VaccineRegistrationException {
+		   
+		     List<VaccineRegistration>   allRegistration=  daoVacRegistration.findAll();
+		     
+		       if(allRegistration.size()>=0)
+		       {
+		    	   throw new VaccineRegistrationException("Registration of  vaccine doesn't exist..");
+		       }
+		       
+		       return allRegistration;
+	}
+	
 	
 	@Override
 	public VaccineRegistration getVaccineRegistration(Long mobileNumber,Integer memberId) throws VaccineRegistrationException,MemberException {

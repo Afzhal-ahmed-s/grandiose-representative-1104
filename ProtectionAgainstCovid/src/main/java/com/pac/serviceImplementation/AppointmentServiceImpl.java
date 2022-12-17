@@ -73,7 +73,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 	}
 	
 	@Override
-	public Appointment addAppointmentTest(Appointment app,Integer memId) throws MemberException,AppointmentException {
+	public Appointment addAppointment(Appointment app,Integer memId) throws MemberException,AppointmentException {
 		
 		// svae other relationships also
 		
