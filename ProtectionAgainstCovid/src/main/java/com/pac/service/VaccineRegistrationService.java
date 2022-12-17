@@ -15,6 +15,8 @@ import com.pac.model.VaccineRegistration;
 public interface VaccineRegistrationService {
 
 
+	public List<VaccineRegistration> getAllVaccineRegistration() throws VaccineRegistrationException;
+	
 	public VaccineRegistration getVaccineRegistration(Long mobileNumber,Integer memberId) throws VaccineRegistrationException,MemberException;
 
 	public Member getAllMember(Long mobileNumber,Integer adminId) throws VaccineRegistrationException,AdminLoginException ;

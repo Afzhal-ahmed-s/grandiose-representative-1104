@@ -18,7 +18,7 @@ public interface AppointmentService {
 
 	public Appointment getAppointmentByBookingId(Long bookingId,Integer AdminId)throws AppointmentException,AdminLoginException;
 	
-	public Appointment addAppointmentTest(Appointment app,Integer memId) throws MemberException,AppointmentException;
+	public Appointment addAppointment(Appointment app,Integer memId) throws MemberException,AppointmentException;
 
 	public Appointment updateAppointment(Appointment app,Integer memId)throws AppointmentException,MemberException;
 
