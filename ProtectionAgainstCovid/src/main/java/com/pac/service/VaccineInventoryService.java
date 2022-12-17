@@ -10,5 +10,5 @@ public interface VaccineInventoryService {
 	public List<VaccineInventory> allVaccineInventory()throws VaccineInventoryException;
 	public Boolean deleteVaccineInventory(Integer inventoryId)throws VaccineInventoryException;
 	public List<VaccineInventory> getVaccineInventoryByDate(LocalDate date)throws VaccineInventoryException;
-	
+	public VaccineInventory  getVaccineInventoryByCenter(Integer code);
 }
