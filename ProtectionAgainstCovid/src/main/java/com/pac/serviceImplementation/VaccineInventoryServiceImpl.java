@@ -42,6 +42,12 @@ public class VaccineInventoryServiceImpl implements VaccineInventoryService {
 			return list;
 		
 	}
+
+	@Override
+	public VaccineInventory getVaccineInventoryByCenter(Integer code) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 
