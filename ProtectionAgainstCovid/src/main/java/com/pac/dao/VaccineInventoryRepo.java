@@ -11,4 +11,6 @@ import com.pac.model.VaccineInventory;
 public interface VaccineInventoryRepo extends JpaRepository<VaccineInventory, Integer>{
 	
 	public List<VaccineInventory> findBydate(LocalDate date);
+	
+	public VaccineInventory  findByCode(Integer code);
 }
