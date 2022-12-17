@@ -23,6 +23,7 @@ import com.pac.model.Member;
 import com.pac.model.VaccineRegistration;
 import com.pac.service.AppointmentService;
 import com.pac.service.VaccineRegistrationService;
+
 @Service
 public class AppointmentServiceImpl implements AppointmentService{
 	

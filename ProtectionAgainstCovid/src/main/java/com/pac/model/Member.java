@@ -44,3 +44,37 @@ public class Member {
 	private List<Appointment> appointments;
 	
 }
+
+//Demo Member json file
+//{
+//    "doseOneStatus" : false,
+//    "doseTwoStatus" : false,
+//    "doseOneDate" : "2022-09-10",
+//    "doseTwoDate" : "2022-12-10"
+//}
+
+
+//{
+//    "doseOneStatus": false,
+//    "doseTwoStatus": false,
+//    "doseOneDate": "2000-09-10",
+//    "doseTwoDate": "2000-12-10",
+//    "idCard": {
+//        "name": "Afzhal",
+//        "dob" : "1998-09-12",
+//        "gender" : "male",
+//        "city" : "cbe",
+//        "address" : "tn",
+//        "state" : "tamilnadu",
+//        "pincode" : "641030",
+//        "aadharCard" : {
+//            "aadharNo" : "aadhar1234"
+//        },
+//        "panCard" :{
+//            "panNo" : "pan1234"
+//        }  
+//    },
+//    "vaccineRegistration": null,
+//    "vaccine": null,
+//    "appointments": []
+//}
