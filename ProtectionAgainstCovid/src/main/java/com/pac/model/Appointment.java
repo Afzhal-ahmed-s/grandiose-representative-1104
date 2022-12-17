@@ -35,14 +35,14 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long bookingId;
 	
-	@Size(min = 9  , max = 10 , message = "Please Enter valid mobile no ")
-	@NotNull(message = "Mobile number is mandatory")
-	@Pattern(regexp =  "^[7-9][0-9]9$")
-	@NotEmpty(message = "Mobile number is mandatory")
+//	@Size(min = 9  , max = 10 , message = "Please Enter valid mobile no ")
+//	@NotNull(message = "Mobile number is mandatory")
+//	@Pattern(regexp =  "^[7-9][0-9]9$")
+//	@NotEmpty(message = "Mobile number is mandatory")
 	@Column(unique = true)
 	private Long mobileNo;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private LocalDate dateOfBooking;
 	
 	private Boolean bookingstats;
