@@ -19,16 +19,19 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
 @Getter
+@Setter
+@ToString
 public class VaccineRegistration {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long mobileNo;
 	@NotNull(message = "{notnull.mesage}")
 	private LocalDate dateOfRegsitration;
@@ -38,38 +41,10 @@ public class VaccineRegistration {
 //	@JsonIgnore
 //	private List<Member>members;
 	
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private Member members;
 
 
-	public Long getMobileNo() {
-		return mobileNo;
-	}
 
-
-	public void setMobileNo(Long mobileNo) {
-		this.mobileNo = mobileNo;
-	}
-
-
-	public LocalDate getDateOfRegsitration() {
-		return dateOfRegsitration;
-	}
-
-
-	public void setDateOfRegsitration(LocalDate dateOfRegsitration) {
-		this.dateOfRegsitration = dateOfRegsitration;
-	}
-
-
-	public Member getMembers() {
-		return members;
-	}
-
-
-	public void setMembers(Member members) {
-		this.members = members;
-	}
-	
-	
 }

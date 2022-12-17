@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pac.excpetion.AdminLoginException;
 import com.pac.excpetion.AppointmentException;
+import com.pac.excpetion.LoginException;
 import com.pac.excpetion.MemberException;
+import com.pac.excpetion.VaccinationCenterException;
 import com.pac.excpetion.VaccineRegistrationException;
 import com.pac.model.Appointment;
 import com.pac.service.AppointmentService;
@@ -40,7 +42,7 @@ public class AppiontmentController {
 	private MemberService memberservice;
 
 	@GetMapping("/allAppointments/{key}")
-	public ResponseEntity<List<Appointment>> getAllAppointments(@PathVariable("key") Integer key) throws AppointmentException, AdminLoginException {
+	public ResponseEntity<List<Appointment>> getAllAppointments(@PathVariable("key") String key) throws AppointmentException, AdminLoginException, LoginException {
 		
 		List<Appointment> app = appointmentService.getAllAppointment(key);
 		return new ResponseEntity<>(app,HttpStatus.ACCEPTED);
@@ -48,14 +50,14 @@ public class AppiontmentController {
 	
 	
 	@PostMapping("/addAppointment/{memberId}/{key}")
-	public ResponseEntity<Appointment> addAppointmentByMemberId(@Valid @RequestBody Appointment ap ,@PathVariable Integer memberId ) throws AppointmentException, MemberException {
+	public ResponseEntity<Appointment> addAppointmentByMemberId(@Valid @RequestBody Appointment ap ,@PathVariable("memberId") Integer memberId,@PathVariable("key") String key ) throws AppointmentException, MemberException, LoginException, VaccineRegistrationException, VaccinationCenterException, AdminLoginException {
 		
-		Appointment app = appointmentService.addAppointment(ap, memberId);
+		Appointment app = appointmentService.addAppointment(ap, memberId,key);
 		return new ResponseEntity<>(app,HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping("/getAppointment/{bookingId}/{key}")
-	public ResponseEntity<Appointment> getAppointment(@PathVariable("bookingId") long bookingId ,@PathVariable("key") Integer key) throws AppointmentException, AdminLoginException {
+	public ResponseEntity<Appointment> getAppointment(@PathVariable("bookingId") long bookingId ,@PathVariable("key") String key) throws AppointmentException, AdminLoginException {
 		
 		Appointment app =  appointmentService.getAppointmentByBookingId(bookingId, key) ;
 		
@@ -63,7 +65,7 @@ public class AppiontmentController {
 	}
 	
 	@PutMapping("/updateAppointment/{key}")
-	public ResponseEntity<Appointment> updateAppointment(@Valid @RequestBody Appointment app ,@PathVariable("key") Integer key ) throws AppointmentException, MemberException{
+	public ResponseEntity<Appointment> updateAppointment(@Valid @RequestBody Appointment app ,@PathVariable("key") String key ) throws AppointmentException, MemberException, AdminLoginException{
 		
 		Appointment app2 = appointmentService.updateAppointment(app, key) ;
 		
@@ -71,7 +73,7 @@ public class AppiontmentController {
 	}
 	
 	@DeleteMapping("/deleteAppointment/{bookingId}/{key}")
-	public ResponseEntity<String> deleteAppointment(@PathVariable("bookingId") Long bookingId,@PathVariable("key")Integer key)throws AppointmentException, MemberException{
+	public ResponseEntity<String> deleteAppointment(@PathVariable("bookingId") Long bookingId,@PathVariable("key")String key)throws AppointmentException, MemberException, AdminLoginException{
 		
 		boolean ans = appointmentService.deleteAppointment(bookingId, key) ;
 		
