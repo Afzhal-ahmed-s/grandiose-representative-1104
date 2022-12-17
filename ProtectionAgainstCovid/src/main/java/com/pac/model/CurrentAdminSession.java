@@ -28,7 +28,10 @@ public class CurrentAdminSession {
 		super();
 		this.uniqueUserId = uniqueUserId;
 		this.loginDateAndTime = loginDateAndTime;
-	} 
+	}
+
+	
+	
 	
 	
 	

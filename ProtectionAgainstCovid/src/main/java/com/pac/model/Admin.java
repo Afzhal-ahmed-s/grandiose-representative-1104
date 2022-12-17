@@ -20,12 +20,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Admin {
 
-	@NotNull
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer adminId;
 	@NotNull(message = "{notnull.mesage}")
-	@NotEmpty
 	@NotEmpty
 	private String name;
 	@NotNull(message = "{notnull.mesage}")
@@ -37,18 +35,35 @@ public class Admin {
 	@Size(max = 10,min = 10)
 	private String mobileNo;
 	
-	public Admin(@NotNull(message = "{notnull.mesage}") @NotEmpty @NotEmpty String name,
-			@NotNull(message = "{notnull.mesage}") @Email(message = "Please enter valid email") String email,
-			@NotNull(message = "{notnull.mesage}") @NotEmpty String password,
-			@Size(max = 10, min = 10) String mobileNo) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.mobileNo = mobileNo;
-	}
+//	public Admin(@NotNull(message = "{notnull.mesage}") @NotEmpty @NotEmpty String name,
+//			@NotNull(message = "{notnull.mesage}") @Email(message = "Please enter valid email") String email,
+//			@NotNull(message = "{notnull.mesage}") @NotEmpty String password,
+//			@Size(max = 10, min = 10) String mobileNo) {
+//		super();
+//		this.name = name;
+//		this.email = email;
+//		this.password = password;
+//		this.mobileNo = mobileNo;
+//	}
 
-	
+//	public Admin(@NotNull(message = "{notnull.mesage}") @NotEmpty @NotEmpty String name,
+//			@NotNull(message = "{notnull.mesage}") @Email(message = "Please enter valid email") String email,
+//			@NotNull(message = "{notnull.mesage}") @NotEmpty String password,
+//			@Size(max = 10, min = 10) String mobileNo) {
+//		super();
+//		this.name = name;
+//		this.email = email;
+//		this.password = password;
+//		this.mobileNo = mobileNo;
+//	}
+
+public Admin(String name, String email, String password, String mobileNo) {
+	super();
+	this.name = name;
+	this.email = email;
+	this.password = password;
+	this.mobileNo = mobileNo;
+}
 
 	
 }
