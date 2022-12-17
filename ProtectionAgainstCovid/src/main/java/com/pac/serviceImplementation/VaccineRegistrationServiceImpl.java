@@ -8,27 +8,49 @@ import javax.management.BadAttributeValueExpException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.pac.dao.AdminSessionDao;
+import com.pac.dao.AppointmentDao;
 import com.pac.dao.MemberDao;
+import com.pac.dao.UserSessionDao;
 import com.pac.dao.VaccineRegistrationDao;
 import com.pac.excpetion.AdminLoginException;
 import com.pac.excpetion.MemberException;
 import com.pac.excpetion.VaccineRegistrationException;
 import com.pac.model.CurrentAdminSession;
+import com.pac.model.CurrentUserSession;
 import com.pac.model.Member;
 import com.pac.model.VaccineRegistration;
+import com.pac.service.MemberService;
+import com.pac.service.VaccinationCenterService;
 import com.pac.service.VaccineRegistrationService;
 
 
 public class VaccineRegistrationServiceImpl implements VaccineRegistrationService{
 
 	@Autowired
-	private VaccineRegistrationDao daoVacRegistration;
+	private AppointmentDao appointmentDao;
 	
 	@Autowired
 	private AdminSessionDao adminDao ;
 //
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	private UserSessionDao userSessionDao;
+	
+//
+	@Autowired
+	private VaccinationCenterService vaccinationCenterService;
+	
+	@Autowired
+	private VaccineRegistrationService registrationService;
+	
+	@Autowired
+	private VaccineRegistrationDao daoVacRegistration;
+	
 	
 
 	@Override
@@ -46,14 +68,15 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	
 	
 	@Override
-	public VaccineRegistration getVaccineRegistration(Long mobileNumber,Integer memberId) throws VaccineRegistrationException,MemberException {
+	public VaccineRegistration getVaccineRegistration(Long mobileNumber,String key) throws VaccineRegistrationException,MemberException, AdminLoginException {
 		      
 		
-		Optional<Member> member = memberDao.findById(memberId);
+		CurrentAdminSession currentSessionAdmin = adminDao.findByUniqueUserId(key);
+		CurrentUserSession currentSessionUser = userSessionDao.findByUniqueUserId(key);
 		
-        if(!member.isPresent()) {
-        	throw new MemberException("Member not found");
-        }
+		if(currentSessionAdmin==null && currentSessionUser==null) {
+			throw new AdminLoginException("Login first");
+		}
         
 		Optional<VaccineRegistration> optRegis= daoVacRegistration.findById(mobileNumber);
 	    
@@ -65,10 +88,12 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 		    
 	}
 	@Override
-	public Member getAllMember(Long mobileNumber,Integer adminId) throws VaccineRegistrationException,AdminLoginException {
+	public Member getAllMember(Long mobileNumber,String key) throws VaccineRegistrationException,AdminLoginException, MemberException {
 
-		Optional<CurrentAdminSession> adminSession = adminDao.findById(adminId);
-		if(!adminSession.isPresent()) {
+		CurrentAdminSession currentSessionAdmin = adminDao.findByUniqueUserId(key);
+		CurrentUserSession currentSessionUser = userSessionDao.findByUniqueUserId(key);
+		
+		if(currentSessionAdmin==null && currentSessionUser==null) {
 			throw new AdminLoginException("Login first");
 		}
 		
@@ -86,15 +111,15 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	}
 	
 	@Override
-	public VaccineRegistration addVaccineRegistration(VaccineRegistration registration,Integer memberId) throws VaccineRegistrationException, MemberException {
+	public VaccineRegistration addVaccineRegistration(VaccineRegistration registration,String key) throws VaccineRegistrationException, MemberException {
 		 
 		//Login the members first
 		
-		Optional<Member> member = memberDao.findById(memberId);
+		CurrentUserSession currentSessionUser = userSessionDao.findByUniqueUserId(key);
 		
-        if(!member.isPresent()) {
-        	throw new MemberException("Member not found");
-        }
+		if( currentSessionUser==null) {
+			throw new MemberException("Login first");
+		}
         
 		
 		 VaccineRegistration registraionDone=daoVacRegistration.save(registration);
@@ -104,14 +129,13 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	}
 	
 	@Override
-	public VaccineRegistration updateVaccineRegistration(VaccineRegistration registration, Integer memberId) throws VaccineRegistrationException,MemberException {
+	public VaccineRegistration updateVaccineRegistration(VaccineRegistration registration, String key) throws VaccineRegistrationException,MemberException {
 		 
-		Optional<Member> member = memberDao.findById(memberId);
+		CurrentUserSession currentSessionUser = userSessionDao.findByUniqueUserId(key);
 		
-        if(!member.isPresent()) {
-        	throw new MemberException("Member not found");
-        }
-
+		if( currentSessionUser==null) {
+			throw new MemberException("Login first");
+		}
 		Optional<VaccineRegistration> optRegis= daoVacRegistration.findById(registration.getMobileNo());
         
         if(!optRegis.isPresent())
@@ -125,14 +149,14 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	}
 	
 	@Override
-	public boolean deleteVaccineRegistration(VaccineRegistration registration,Integer memberId) throws VaccineRegistrationException,MemberException{
+	public boolean deleteVaccineRegistration(VaccineRegistration registration,String key) throws VaccineRegistrationException,MemberException{
 		     
 
-		Optional<Member> member = memberDao.findById(memberId);
+		CurrentUserSession currentSessionUser = userSessionDao.findByUniqueUserId(key);
 		
-        if(!member.isPresent()) {
-        	throw new MemberException("Member not found");
-        }
+		if( currentSessionUser==null) {
+			throw new MemberException("Login first");
+		}
 		
 		Optional<VaccineRegistration> optRegisDelete= daoVacRegistration.findById(registration.getMobileNo());
         
