@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.management.BadAttributeValueExpException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pac.dao.AdminSessionDao;
 import com.pac.dao.AppointmentDao;
@@ -23,7 +24,7 @@ import com.pac.service.MemberService;
 import com.pac.service.VaccinationCenterService;
 import com.pac.service.VaccineRegistrationService;
 
-
+@Service
 public class VaccineRegistrationServiceImpl implements VaccineRegistrationService{
 
 	@Autowired
@@ -31,7 +32,7 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	
 	@Autowired
 	private AdminSessionDao adminDao ;
-//
+
 	@Autowired
 	private MemberDao memberDao;
 	
@@ -41,12 +42,11 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	@Autowired
 	private UserSessionDao userSessionDao;
 	
-//
 	@Autowired
 	private VaccinationCenterService vaccinationCenterService;
 	
-	@Autowired
-	private VaccineRegistrationService registrationService;
+//	@Autowired
+//	private VaccineRegistrationService registrationService;
 	
 	@Autowired
 	private VaccineRegistrationDao daoVacRegistration;
@@ -64,6 +64,7 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 		       }
 		       
 		       return allRegistration;
+//		return null;
 	}
 	
 	
@@ -85,7 +86,8 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 	    	  return optRegis.get();
 	    }
 	    throw new VaccineRegistrationException("Vaccine Registration not found with this Number..");
-		    
+	    
+//	    return null;
 	}
 	@Override
 	public Member getAllMember(Long mobileNumber,String key) throws VaccineRegistrationException,AdminLoginException, MemberException {
@@ -107,7 +109,8 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 		else {
 			throw new VaccineRegistrationException("No member");
 		}
-		   
+//	    return null;
+
 	}
 	
 	@Override
@@ -125,7 +128,8 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 		 VaccineRegistration registraionDone=daoVacRegistration.save(registration);
 	    
 	     return registraionDone;
-		   
+//	    return null;
+
 	}
 	
 	@Override
@@ -145,7 +149,8 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
         
         daoVacRegistration.save(registration);
         return optRegis.get();
-		           
+//	    return null;
+       
 	}
 	
 	@Override
