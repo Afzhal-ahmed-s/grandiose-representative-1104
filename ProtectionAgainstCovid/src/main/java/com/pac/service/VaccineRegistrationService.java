@@ -17,15 +17,15 @@ public interface VaccineRegistrationService {
 
 	public List<VaccineRegistration> getAllVaccineRegistration() throws VaccineRegistrationException;
 	
-	public VaccineRegistration getVaccineRegistration(Long mobileNumber,Integer memberId) throws VaccineRegistrationException,MemberException;
+	public VaccineRegistration getVaccineRegistration(Long mobileNumber,String key) throws VaccineRegistrationException,MemberException,AdminLoginException;
 
-	public Member getAllMember(Long mobileNumber,Integer adminId) throws VaccineRegistrationException,AdminLoginException ;
+	public Member getAllMember(Long mobileNumber,String key) throws VaccineRegistrationException,AdminLoginException,MemberException,AdminLoginException ;
 
-	public VaccineRegistration addVaccineRegistration(VaccineRegistration registration,Integer memberId) throws VaccineRegistrationException,MemberException;
+	public VaccineRegistration addVaccineRegistration(VaccineRegistration registration,String key) throws VaccineRegistrationException,MemberException;
 	
-	public VaccineRegistration updateVaccineRegistration(VaccineRegistration registration,Integer memberId) throws VaccineRegistrationException,MemberException;
+	public VaccineRegistration updateVaccineRegistration(VaccineRegistration registration,String key) throws VaccineRegistrationException,MemberException;
 
-	public boolean deleteVaccineRegistration(VaccineRegistration registration,Integer memberId) throws VaccineRegistrationException,MemberException;
+	public boolean deleteVaccineRegistration(VaccineRegistration registration,String key) throws VaccineRegistrationException,MemberException;
 
 	
 }
