@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.pac.dao.AdminDao;
 import com.pac.dao.AdminSessionDao;
@@ -22,7 +23,7 @@ import com.pac.model.Member;
 import com.pac.model.VaccineRegistration;
 import com.pac.service.AppointmentService;
 import com.pac.service.VaccineRegistrationService;
-
+@Service
 public class AppointmentServiceImpl implements AppointmentService{
 	
 	@Autowired
