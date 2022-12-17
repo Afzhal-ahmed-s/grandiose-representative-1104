@@ -59,8 +59,7 @@ public class VaccineCenterServiceImpl implements VaccinationCenterService{
 		Optional<VaccinationCenter> opt = vcdao.findById(vaccinationCenter.getCode());
 		
 		if(opt.isPresent()) {
-			VaccinationCenter vc = opt.get();
-			return vcdao.save(vc);
+			return vcdao.save(vaccinationCenter);
 		}
 		else
 			throw new VaccinationCenterException("No Vaccination Center Exisits");
