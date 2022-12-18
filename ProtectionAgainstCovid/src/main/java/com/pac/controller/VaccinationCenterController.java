@@ -59,14 +59,11 @@ public class VaccinationCenterController {
 		
 	}
 	
-	//***********
-//	@DeleteMapping("/getvcCenters/{code}")
-//	public ResponseEntity<VaccinationCenter> deleteVaccinationCenterHandler(@RequestBody VaccinationCenter vaccinationCenter){
-//		
-//		VaccinationCenter vc = vcService.deleteVaccinationCenter();
+	@DeleteMapping("/getvcCenters/{code}")
+	public ResponseEntity<VaccinationCenter> deleteVaccinationCenterHandler(@PathVariable("code") @RequestBody VaccinationCenter vaccinationCenter) throws VaccinationCenterException{
 		
-//	}
-	
-	//*******************
+		boolean vc = vcService.deleteVaccinationCenter(vaccinationCenter);
+		return new ResponseEntity<VaccinationCenter>(vaccinationCenter, HttpStatus.ACCEPTED);
+	}
 	
 }
