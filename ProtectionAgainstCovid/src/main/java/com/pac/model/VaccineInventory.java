@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -27,9 +28,9 @@ public class VaccineInventory {
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
 	private List<Vaccine> vaccine;
 	
-//	@OneToOne(cascade = CascadeType.ALL, mappedBy = "vaccineInventory")
-//	private VaccinationCenter vaccinationCenter;
+	@OneToOne(cascade = CascadeType.ALL)
+	private VaccinationCenter vaccinationCenter;
 	
-	@Embedded
+	@ManyToOne
 	private VaccineCount vaccineCount;
 }

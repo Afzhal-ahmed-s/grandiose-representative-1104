@@ -55,8 +55,13 @@ public class VaccineServiceImpl implements VaccineService{
 
 	@Override
 	public Vaccine updateVaccine(Vaccine vaccine) throws VaccineException {
-		vr.findById(vaccine.getVaccineId())
-		.orElseThrow(() -> new VaccineException("No vaccine Present With this "+vaccine.getVaccineId()));
+		Optional<Vaccine> vc=vr.findById(vaccine.getVaccineId());
+				if(vc!=null) {
+					vr.save(vaccine);
+				}else {
+				throw new VaccineException("No vaccine Present With this "+vaccine.getVaccineId());
+				}
+		
 		
 		return vr.save(vaccine);
 	}
