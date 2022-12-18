@@ -30,6 +30,7 @@ import com.pac.service.AppointmentService;
 import com.pac.service.MemberService;
 import com.pac.service.VaccinationCenterService;
 import com.pac.service.VaccineRegistrationService;
+
 @Service
 public class AppointmentServiceImpl implements AppointmentService{
 	

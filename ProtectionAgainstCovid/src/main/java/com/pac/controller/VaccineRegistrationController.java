@@ -26,9 +26,6 @@ public class VaccineRegistrationController {
     private VaccineRegistrationService registrationService;
 	
 	
-	
-	
-	
 	@GetMapping("/Allregistrations")
 	     public ResponseEntity<List<VaccineRegistration>> getallRegistration() throws VaccineRegistrationException{
 	    	 
