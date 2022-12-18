@@ -117,7 +117,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 		Integer id = app.getVaccinationCenter().getCode();
 		
 		
-		VaccinationCenter vaccinationCenter = vaccinationCenterService.getVaccineCenter(id);
+		VaccinationCenter vaccinationCenter = vaccinationCenterService.getVaccineCenter(id,key);
 		
 		
 		app.setVaccinationCenter(vaccinationCenter);
