@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.pac.excpetion.AdminLoginException;
 import com.pac.excpetion.MemberException;
@@ -20,6 +22,8 @@ import com.pac.model.Member;
 import com.pac.model.VaccineRegistration;
 import com.pac.service.VaccineRegistrationService;
 
+@RestController
+@RequestMapping("/Registration")
 public class VaccineRegistrationController {
 
 	@Autowired
@@ -36,9 +40,9 @@ public class VaccineRegistrationController {
 	     }
 	
 	@GetMapping("/member/{mobileNumber}")
-	 public ResponseEntity<Member> getAllMemberByNu(@PathVariable("mobileNumber") Long mobileNumber,@RequestParam String key) throws VaccineRegistrationException, AdminLoginException, MemberException{
+	 public ResponseEntity<List<Member>> getAllMemberByNu(@PathVariable("mobileNumber") Long mobileNumber,@RequestParam String key) throws VaccineRegistrationException, AdminLoginException, MemberException{
 		 
-		    return new ResponseEntity<Member>(registrationService.getAllMember(mobileNumber, key),HttpStatus.OK);
+		    return new ResponseEntity<List<Member>>(registrationService.getAllMember(mobileNumber, key),HttpStatus.OK);
 	 }
 	
 	

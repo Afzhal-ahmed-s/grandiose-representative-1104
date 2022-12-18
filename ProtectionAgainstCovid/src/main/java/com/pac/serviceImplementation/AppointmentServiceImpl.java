@@ -107,34 +107,27 @@ public class AppointmentServiceImpl implements AppointmentService{
 			throw new MemberException("Login first");
 		}
 		
-		VaccineRegistration reg = registrationService.getVaccineRegistration(app.getMobileNo(), key) ;
+		Optional<Member> opt = memberDao.findById(memId);
+		Member member = opt.get();
+		
+		app.setMember(member);
+		app.setDateOfBooking(LocalDate.now());
+		app.setBookingstats(true);
+		
+		Integer id = app.getVaccinationCenter().getCode();
 		
 		
-		if (reg == null)
-			throw new RuntimeException("First do the registration...");
-		else {
-			
-			Member member = reg.getMembers();
-			
-			app.setMember(member);
-			app.setDateOfBooking(LocalDate.now());
-			app.setBookingstats(true);
-			
-			Integer id = app.getVaccinationCenter().getCode();
-			
-			
-			VaccinationCenter vaccinationCenter = vaccinationCenterService.getVaccineCenter(id);
-			
-			
-			app.setVaccinationCenter(vaccinationCenter);
-			
-			
-			Appointment a = appointmentDao.save(app);
-			member.getAppointments().add(a);
-			memberService.updateMember(member, key);
-			
-			return a;
-		}
+		VaccinationCenter vaccinationCenter = vaccinationCenterService.getVaccineCenter(id);
+		
+		
+		app.setVaccinationCenter(vaccinationCenter);
+		
+		
+		Appointment a = appointmentDao.save(app);
+		member.getAppointments().add(a);
+		memberService.updateMember(member, key);
+		
+		return a;
 	}
 	
 	
@@ -150,7 +143,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 		}
 		
        
-		Optional<Appointment> opt= appointmentDao.findById(app.getMobileNo());
+		Optional<Appointment> opt= appointmentDao.findById(app.getBookingId());
         
         if(!opt.isPresent())
         {

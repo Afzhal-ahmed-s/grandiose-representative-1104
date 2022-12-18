@@ -27,8 +27,8 @@ public class VaccineInventory {
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
 	private List<Vaccine> vaccine;
 	
-//	@OneToOne(cascade = CascadeType.ALL, mappedBy = "vaccineInventory")
-//	private VaccinationCenter vaccinationCenter;
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "vaccineInventory")
+	private VaccinationCenter vaccinationCenter;
 	
 	@Embedded
 	private VaccineCount vaccineCount;
