@@ -10,12 +10,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Vaccine {
 
 	@Id
@@ -26,13 +30,15 @@ public class Vaccine {
 	@NotNull(message = "{notnull.mesage}")
 	private String description;;
 
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private Member member;
 	
+	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	private VaccineInventory vaccineInventory;
 	
-	@Embedded
-	private VaccineCount vaccineCount;
+	//@Embedded
+	//private VaccineCount vaccineCount;
 	
 }
