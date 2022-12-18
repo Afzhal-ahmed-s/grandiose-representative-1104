@@ -41,7 +41,7 @@ public class VaccinationCenter {
 	private String pincode;
 	
 	@JsonIgnore
-	@ManyToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Appointment> appointments;
 	
 	@OneToOne(cascade = CascadeType.ALL)

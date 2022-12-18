@@ -90,7 +90,7 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 //	    return null;
 	}
 	@Override
-	public Member getAllMember(Long mobileNumber,String key) throws VaccineRegistrationException,AdminLoginException, MemberException {
+	public List<Member> getAllMember(Long mobileNumber,String key) throws VaccineRegistrationException,AdminLoginException, MemberException {
 
 		CurrentAdminSession currentSessionAdmin = adminDao.findByUniqueUserId(key);
 		CurrentUserSession currentSessionUser = userSessionDao.findByUniqueUserId(key);
@@ -103,7 +103,7 @@ public class VaccineRegistrationServiceImpl implements VaccineRegistrationServic
 		
 		if(opt.isPresent()) {
 			VaccineRegistration vg = opt.get();
-			Member members = vg.getMembers();
+			List<Member> members = vg.getMembers();
 			return members;
 		}
 		else {

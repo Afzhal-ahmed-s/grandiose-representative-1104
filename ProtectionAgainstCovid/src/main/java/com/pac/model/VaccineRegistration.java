@@ -42,8 +42,8 @@ public class VaccineRegistration {
 //	private List<Member>members;
 	
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
-	private Member members;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Member> members;
 
 
 

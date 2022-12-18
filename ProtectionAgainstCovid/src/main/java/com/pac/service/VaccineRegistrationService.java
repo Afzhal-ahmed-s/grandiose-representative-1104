@@ -19,7 +19,7 @@ public interface VaccineRegistrationService {
 	
 	public VaccineRegistration getVaccineRegistration(Long mobileNumber,String key) throws VaccineRegistrationException,MemberException,AdminLoginException;
 
-	public Member getAllMember(Long mobileNumber,String key) throws VaccineRegistrationException,AdminLoginException,MemberException,AdminLoginException ;
+	public List<Member> getAllMember(Long mobileNumber,String key) throws VaccineRegistrationException,AdminLoginException,MemberException,AdminLoginException ;
 
 	public VaccineRegistration addVaccineRegistration(VaccineRegistration registration,String key) throws VaccineRegistrationException,MemberException;
 	
