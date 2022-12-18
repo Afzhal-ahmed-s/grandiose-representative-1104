@@ -7,7 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pac.dao.VaccinationCenterRepo;
+//import com.pac.dao.VaccinationCenterRepo;
+import com.pac.dao.VaccineCenterDao;
 import com.pac.dao.VaccineCountrepo;
 import com.pac.dao.VaccineInventoryRepo;
 import com.pac.dao.VaccineRepo;
@@ -30,7 +31,7 @@ public class VaccineInventoryServiceImpl implements VaccineInventoryService {
 	private VaccineRepo vr;
 	
 	@Autowired
-	private VaccinationCenterRepo vaccinationCenterRepo;
+	private VaccineCenterDao vaccinationCenterRepo;
 	
 	
 	@Override
@@ -114,6 +115,17 @@ public class VaccineInventoryServiceImpl implements VaccineInventoryService {
 	public List<VaccineInventory> getVaccineInventoryByVaccine(Vaccine vaccine) throws VaccineInventoryException {
 		//List<VaccineInventory> v=v.findAll().orElseThrow(() -> new VaccineInventoryException("Not Present With this "+vaccine.getVaccineId()));
 		return null;
+	}
+
+	@Override
+	public VaccineInventory addVaccineInventory(VaccineInventory vaccineInventory) throws VaccineInventoryException {
+		VaccineInventory vi = vcir.save(vaccineInventory);
+		
+		if(vi == null) {
+			throw new VaccineInventoryException("Failed to Add..");
+		}
+		
+		return vi;
 	}
 	
 	

@@ -10,6 +10,8 @@ import com.pac.model.VaccineCount;
 import com.pac.model.VaccineInventory;
 
 public interface VaccineInventoryService {
+	public VaccineInventory addVaccineInventory(VaccineInventory vaccineInventory)throws VaccineInventoryException;
+	
 	public List<VaccineInventory> allVaccineInventory()throws VaccineInventoryException;
 	public Boolean deleteVaccineInventory(VaccineInventory vaccineInventory)throws VaccineInventoryException;
 	public List<VaccineInventory> getVaccineInventoryByDate(String  date)throws VaccineInventoryException;
