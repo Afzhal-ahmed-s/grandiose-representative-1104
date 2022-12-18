@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,9 +27,10 @@ public class VaccineInventory {
 	private Integer inventoryId;
 	private LocalDate date;
 	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
 	private List<Vaccine> vaccine;
-	
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private VaccinationCenter vaccinationCenter;
 	
