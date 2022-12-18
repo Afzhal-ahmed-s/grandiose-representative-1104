@@ -7,8 +7,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,12 +27,13 @@ public class VaccineInventory {
 	private Integer inventoryId;
 	private LocalDate date;
 	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
 	private List<Vaccine> vaccine;
-	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "vaccineInventory")
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
 	private VaccinationCenter vaccinationCenter;
 	
-	@Embedded
+	@ManyToOne
 	private VaccineCount vaccineCount;
 }
