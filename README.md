@@ -4,12 +4,14 @@
 </p>
 
 ## ER-Diagram
-![ER Diagram](https://user-images.githubusercontent.com/86916671/201477506-29a8c28e-f0af-4c45-954a-960304d985ea.jpeg)
+![ER_diagram](https://user-images.githubusercontent.com/96117548/208404656-8473c0c5-da53-4021-99b8-c7cc8829658f.jpg)
 
 # REST API for Protection against Covid Application
 
-* We have developed this REST API for an Covid-19 Application. This API performs all the fundamental CRUD operations of any Covid-19 Application platform with user validation at every step.
-* This project is developed by team of 5 Back-end Developers during project week in Masai School. 
+* This project has been developed by a team of 4 Java Back-End developers during our project week in Masai School. 
+* This REST-API will facilitate the citizen with an option to register and schedule the vaccination session online in vaccination centers of their choice.
+* The Citizen self-registration module will ensure fool-proof identification of deserving candidates for receiving the vaccines.
+* The objective is to handhold the citizens to register and schedule an appointment for vaccination
 
 ## Tech Stack
 
