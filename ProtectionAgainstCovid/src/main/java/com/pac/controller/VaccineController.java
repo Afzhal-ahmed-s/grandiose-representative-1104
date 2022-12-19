@@ -26,10 +26,10 @@ public class VaccineController {
 	@Autowired
 	private VaccineService vs;
 	
-	@PostMapping("/vaccine")
-	public ResponseEntity<Vaccine> registerVaccineHandler(@Valid @RequestBody Vaccine vac)throws VaccineException{
+	@PostMapping("/vaccine/{key}")
+	public ResponseEntity<Vaccine> registerVaccineHandler(@Valid @RequestBody Vaccine vac, String key)throws VaccineException, LoginException{
 		
-		Vaccine vc = vs.addVaccine(vac);
+		Vaccine vc = vs.addVaccine(vac, key);
 		
 		return new ResponseEntity<Vaccine>(vc, HttpStatus.CREATED);
 		
@@ -38,44 +38,44 @@ public class VaccineController {
 	@GetMapping("/allvaccine")
 	public ResponseEntity<List<Vaccine>> getAllVaccineHandler()throws VaccineException{
 		
-		List<Vaccine> vccs = vs.allVaccine();
+		List<Vaccine> vccs = vs.allVaccines();
 		
 		return new ResponseEntity<List<Vaccine>>(vccs, HttpStatus.OK);
 		
 	}
 	
 	
-	@GetMapping("/vaccine")
-    public ResponseEntity<List<Vaccine>> getVaccinebyNameHandler(@RequestParam String vaccineName)throws VaccineException{
-		List<Vaccine> vccs =vs.getVaccineByName(vaccineName);
+	@GetMapping("/vaccine/{key}")
+    public ResponseEntity<List<Vaccine>> getVaccinebyNameHandler(@RequestParam String vaccineName, String key)throws VaccineException, LoginException{
+		List<Vaccine> vccs =vs.getVaccineByName(vaccineName, key);
 		
 		return new ResponseEntity<List<Vaccine>>(vccs, HttpStatus.OK);
 		
 	}
 	
-	@GetMapping("/vaccine/{vacId}")
-	public ResponseEntity<Vaccine> getVaccineByIdHandler(@PathVariable ("vacId")Integer vaccineId)throws VaccineException{
+	@GetMapping("/vaccine/{vacId}/{key}")
+	public ResponseEntity<Vaccine> getVaccineByIdHandler(@PathVariable ("vacId")Integer vaccineId, String key)throws VaccineException, LoginException{
 		
-		Vaccine vc = vs.getVaccineById(vaccineId);
+		Vaccine vc = vs.getVaccineById(vaccineId, key);
 		
 		return new ResponseEntity<Vaccine>(vc, HttpStatus.OK);
 		
 	}
 	
 	
-	@PutMapping("/upvaccine")
-	public ResponseEntity<Vaccine> updateVaccineHandler(@Valid @RequestBody Vaccine c)throws VaccineException{
+	@PutMapping("/upvaccine/{key}")
+	public ResponseEntity<Vaccine> updateVaccineHandler(@Valid @RequestBody Vaccine c, String key)throws VaccineException, LoginException{
 		
-		Vaccine vc = vs.updateVaccine(c);
+		Vaccine vc = vs.updateVaccine(c, key);
 		
 		return new ResponseEntity<Vaccine>(vc, HttpStatus.ACCEPTED);
 		
 	}
 	
-	@DeleteMapping("/vaccine")
-	public ResponseEntity< Boolean > deleteVaccine( @Valid @RequestBody Vaccine v ) throws VaccineException{
+	@DeleteMapping("/vaccine/{key}")
+	public ResponseEntity< Boolean > deleteVaccine( @Valid @RequestBody Vaccine v ,String key) throws VaccineException, LoginException{
 		
-		Boolean boolean1 = vs.deleteVaccine( v );
+		Boolean boolean1 = vs.deleteVaccine(v.getVaccineId(), key);
 		
 		
 		return new ResponseEntity<Boolean>( boolean1 , HttpStatus.ACCEPTED );

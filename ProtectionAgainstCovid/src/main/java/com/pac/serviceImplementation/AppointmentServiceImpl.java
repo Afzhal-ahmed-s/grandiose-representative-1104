@@ -1,13 +1,11 @@
 package com.pac.serviceImplementation;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pac.dao.AdminDao;
 import com.pac.dao.AdminSessionDao;
 import com.pac.dao.AppointmentDao;
 import com.pac.dao.MemberDao;
@@ -18,14 +16,9 @@ import com.pac.excpetion.LoginException;
 import com.pac.excpetion.MemberException;
 import com.pac.excpetion.VaccinationCenterException;
 import com.pac.excpetion.VaccineRegistrationException;
-import com.pac.model.Admin;
-import com.pac.model.AdminLogin;
 import com.pac.model.Appointment;
 import com.pac.model.CurrentAdminSession;
 import com.pac.model.CurrentUserSession;
-import com.pac.model.Member;
-import com.pac.model.VaccinationCenter;
-import com.pac.model.VaccineRegistration;
 import com.pac.service.AppointmentService;
 import com.pac.service.MemberService;
 import com.pac.service.VaccinationCenterService;

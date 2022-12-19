@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pac.excpetion.LoginException;
 import com.pac.excpetion.VaccinationCenterException;
 import com.pac.excpetion.VaccineException;
 import com.pac.excpetion.VaccineInventoryException;
@@ -33,37 +34,37 @@ public class VaccineInventoriesController {
 	public VaccinationCenterService vacCntrSer;
 	
 	
-	@PostMapping("/vaccineInventory")
-	public ResponseEntity<VaccineInventory> registerVaccineHandler(@Valid @RequestBody VaccineInventory vac)throws VaccineInventoryException{
+	@PostMapping("/vaccineInventory/{key}")
+	public ResponseEntity<VaccineInventory> registerVaccineHandler(@Valid @RequestBody VaccineInventory vac, String key)throws VaccineInventoryException, VaccineException, LoginException{
 		
-		VaccineInventory vi = vis.addVaccineInventory(vac);
+		VaccineInventory vi = vis.addVaccineInventory(vac, key);
 		
 		return new ResponseEntity<VaccineInventory>(vi, HttpStatus.CREATED);
 		
 	}
 	
 	
-	@GetMapping("/vaccineInventories")
-	public ResponseEntity <List<VaccineInventory>> getAllVacciceInventory() throws VaccineInventoryException {
-		
-		List <VaccineInventory>  vi =  vis.allVaccineInventory();
-		
-		return new ResponseEntity<List<VaccineInventory>>(vi, HttpStatus.OK);
-	}
+//	@GetMapping("/vaccineInventories")
+//	public ResponseEntity <List<VaccineInventory>> getAllVacciceInventory() throws VaccineInventoryException {
+//		
+//		List <VaccineInventory>  vi =  vis.
+//		
+//		return new ResponseEntity<List<VaccineInventory>>(vi, HttpStatus.OK);
+//	}
 	
 	
-	@DeleteMapping("/vaccineInventory/{vi}")
-	public ResponseEntity<VaccineInventory> deleteVaccineInventory( @PathVariable("vi")@RequestBody VaccineInventory vaccineInventory ) throws VaccineInventoryException{
+	@DeleteMapping("/vaccineInventory/{vi}/{key}")
+	public ResponseEntity<VaccineInventory> deleteVaccineInventory( @PathVariable("vi")@RequestBody VaccineInventory vaccineInventory, String key ) throws VaccineInventoryException, VaccineException, LoginException{
 	
-		Boolean b =  vis.deleteVaccineInventory( vaccineInventory );
+		Boolean b =  vis.deleteVaccineInventory( vaccineInventory, key );
 		
 		return new ResponseEntity<VaccineInventory>(vaccineInventory, HttpStatus.ACCEPTED);
 	} 
 	
 	@GetMapping("/vaccineInventory/{date}")
-    public ResponseEntity<List<VaccineInventory>> getVaccinebyDateHandler(@PathVariable String date)throws VaccineInventoryException{
-		List<VaccineInventory> vccs =vis.getVaccineInventoryByDate(date);
-		
+    public ResponseEntity<List<VaccineInventory>> getVaccinebyDateHandler(@PathVariable String date, String key)throws VaccineInventoryException, VaccineException, LoginException{
+		List<VaccineInventory> vccs =vis.getVaccineInventoryByDate(LocalDate.parse(date), key);
+
 		return new ResponseEntity<List<VaccineInventory>>(vccs, HttpStatus.OK);
 		
 	}
