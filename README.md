@@ -1,7 +1,7 @@
 # Protection against covid
-<p align="center">
-  <img style="width:25%;" src="https://github.com/suraj-996/lying-powder-9405/blob/main/images/b%20(2).png" />
-</p>
+
+![Protection-2](https://user-images.githubusercontent.com/96117548/208431098-17156c27-d8d5-4996-ad20-b922dabdc5af.jpg)
+
 
 ## ER-Diagram
 ![ER_diagram](https://user-images.githubusercontent.com/96117548/208404656-8473c0c5-da53-4021-99b8-c7cc8829658f.jpg)
