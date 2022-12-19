@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VaccineCount {
-	
-	
+
+	private Integer vaccinecountid;
+
 	private Integer quantity;
 	private Double price;
 	
