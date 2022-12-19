@@ -84,7 +84,7 @@ public class AppointmentServiceImpl implements AppointmentService{
 		CurrentUserSession currentSessionUser = userSessionDao.findByUniqueUserId(AdminId);
 		
 		if(currentSessionAdmin==null && currentSessionUser==null) {
-			throw new AdminLoginException("Logisn first");
+			throw new AdminLoginException("Login first");
 		}
 		
 			
@@ -101,33 +101,17 @@ public class AppointmentServiceImpl implements AppointmentService{
 		
 		// svae other relationships also
 		
-		CurrentUserSession currentSessionUser = userSessionDao.findByUniqueUserId(key);
-		
-		if( currentSessionUser==null) {
-			throw new MemberException("Login first");
-		}
-		
-		Optional<Member> opt = memberDao.findById(memId);
-		Member member = opt.get();
-		
-		app.setMember(member);
-		app.setDateOfBooking(LocalDate.now());
-		app.setBookingstats(true);
-		
-		Integer id = app.getVaccinationCenter().getCode();
-		
-		
-		VaccinationCenter vaccinationCenter = vaccinationCenterService.getVaccineCenter(id,key);
-		
-		
-		app.setVaccinationCenter(vaccinationCenter);
-		
-		
-		Appointment a = appointmentDao.save(app);
-		member.getAppointments().add(a);
-		memberService.updateMember(member, key);
-		
-		return a;
+		CurrentUserSession currentUser = userSessionDao.findByUniqueUserId(key);
+
+		if (currentUser != null) {
+			Appointment appointment = appointmentDao.save(app);
+			if (appointment != null) {
+				return appointment;
+			} else {
+				throw new AppointmentException("Appointment not Scheduled! Please try after some time!");
+			}
+		} else
+			throw new LoginException("Opps...!!! Login as a user first.");
 	}
 	
 	
@@ -135,32 +119,22 @@ public class AppointmentServiceImpl implements AppointmentService{
 	@Override
 	public Appointment updateAppointment(Appointment app,String key) throws AppointmentException,MemberException, AdminLoginException {
 		
-		CurrentAdminSession currentSessionAdmin = adminDao.findByUniqueUserId(key);
-		CurrentUserSession currentSessionUser = userSessionDao.findByUniqueUserId(key);
-		
-		if(currentSessionAdmin==null && currentSessionUser==null) {
-			throw new AdminLoginException("Login first");
-		}
-		
-       
-		Optional<Appointment> opt= appointmentDao.findById(app.getBookingId());
-        
-        if(!opt.isPresent())
-        {
-        	throw new AppointmentException("Vaccine registration doesn't exist..");
-        }
-        
-        Appointment update =  appointmentDao.save(app);
-        
-        update.setVaccinationCenter(app.getVaccinationCenter());
-        update.setBookingId(app.getBookingId());
-        update.setBookingstats(true);
-        update.setDateOfBooking(LocalDate.now());
-        update.setMobileNo(app.getMobileNo());
-        update.setMember(app.getMember());
-		update.setSlot(app.getSlot());
-        
-		return appointmentDao.save(update);
+		CurrentUserSession currentUser = userSessionDao.findByUniqueUserId(key);
+
+		if (currentUser != null) {
+
+			Optional<Appointment> appointment = appointmentDao.findById(app.getBookingId());
+
+			if (appointment.isPresent()) {
+
+				appointmentDao.save(app);
+
+				return appointment.get();
+			} else {
+				throw new AppointmentException("No Appointment found!");
+			}
+		} else
+			throw new AdminLoginException("Opps...!!! Login as a user first.");
 	}
 
 	@Override
