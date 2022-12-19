@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,15 +36,18 @@ public class Member {
 	@OneToOne(cascade = CascadeType.ALL)
 	private IdCard idCard;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
 	private VaccineRegistration vaccineRegistration;
 	
+	@JsonIgnore
 	@OneToOne(cascade = CascadeType.ALL)
 	private Vaccine vaccine;
 
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Appointment> appointments;
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL)
+	private Appointment appointments;
 	
 }
 

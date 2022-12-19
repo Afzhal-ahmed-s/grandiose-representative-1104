@@ -15,25 +15,30 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class VaccineInventory {
 
 	@Id
 	private Integer inventoryId;
 	private LocalDate date;
 	
-	@JsonIgnore
+	
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
 	private List<Vaccine> vaccine;
-	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
-	private VaccinationCenter vaccinationCenter;
 	
-	@ManyToOne
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "vaccineInventory")
+	private List<VaccinationCenter >vaccinationCenter;
+	
+	@Embedded
 	private VaccineCount vaccineCount;
 }

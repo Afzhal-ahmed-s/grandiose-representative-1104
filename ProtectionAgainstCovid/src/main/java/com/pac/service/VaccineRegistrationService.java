@@ -17,7 +17,7 @@ public interface VaccineRegistrationService {
 
 	public List<VaccineRegistration> getAllVaccineRegistration() throws VaccineRegistrationException;
 	
-	public VaccineRegistration getVaccineRegistration(Long mobileNumber,String key) throws VaccineRegistrationException,MemberException,AdminLoginException;
+	public VaccineRegistration getVaccineRegistration(Integer id,String key) throws VaccineRegistrationException,MemberException,AdminLoginException;
 
 	public List<Member> getAllMember(Long mobileNumber,String key) throws VaccineRegistrationException,AdminLoginException,MemberException,AdminLoginException ;
 
@@ -25,7 +25,7 @@ public interface VaccineRegistrationService {
 	
 	public VaccineRegistration updateVaccineRegistration(VaccineRegistration registration,String key) throws VaccineRegistrationException,MemberException;
 
-	public boolean deleteVaccineRegistration(VaccineRegistration registration,String key) throws VaccineRegistrationException,MemberException;
+	public boolean deleteVaccineRegistration(Integer reg, String key) throws VaccineRegistrationException,MemberException;
 
 	
 }

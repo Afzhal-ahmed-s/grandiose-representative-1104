@@ -6,77 +6,143 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pac.dao.AdminSessionDao;
+import com.pac.dao.UserSessionDao;
 import com.pac.dao.VaccineRepo;
+import com.pac.excpetion.LoginException;
 import com.pac.excpetion.VaccineException;
+import com.pac.model.CurrentAdminSession;
+import com.pac.model.CurrentUserSession;
 import com.pac.model.Vaccine;
 import com.pac.service.VaccineService;
 
 @Service
 public class VaccineServiceImpl implements VaccineService{
 	@Autowired
-	VaccineRepo vr;
-	
+	private VaccineRepo vaccineRepo;
+
+	@Autowired
+	private AdminSessionDao adminRepo;
+
+	@Autowired
+	private UserSessionDao userRepo;
+
 	
 	@Override
-	public List<Vaccine> allVaccine() throws VaccineException {
-		List<Vaccine> vac = vr.findAll();
-		if(vac.size() == 0) {
-			throw new VaccineException("No  Present in Database");
+	public List<Vaccine> allVaccines() throws VaccineException {
+		List<Vaccine> vaccines = vaccineRepo.findAll();
+		if (vaccines.size() != 0) {
+			return vaccines;
+		} else {
+			throw new VaccineException("Vaccine not found");
 		}
-		
-		return vac;
 	}
 
 	@Override
-	public List<Vaccine> getVaccineByName(String vaccineName) throws VaccineException {
-		List<Vaccine> vac=vr.findByVaccineName(vaccineName);
-		if(vac.isEmpty())
-			throw new VaccineException("No vaccine found"+vaccineName);
-		return vac;
-	}
+	public List<Vaccine> getVaccineByName(String vaccineName, String key) throws VaccineException, LoginException {
 
-	@Override
-	public Vaccine getVaccineById(Integer vaccineId) throws VaccineException {
-		Vaccine vc=vr.findById(vaccineId)
-				.orElseThrow(() -> new VaccineException("No vaccine Present With this "+vaccineId));
-		return vc;
-	}
+		CurrentAdminSession currentSessionAdmin = adminRepo.findByUniqueUserId(key);
 
-	@Override
-	public Vaccine addVaccine(Vaccine vaccine) throws VaccineException {
-		Vaccine vc = vr.save(vaccine);
-			
-			if(vc == null) {
-				throw new VaccineException("Failed to Add..");
+		CurrentUserSession currentSessionUser = userRepo.findByUniqueUserId(key);
+
+		if (currentSessionAdmin != null || currentSessionUser != null) {
+
+			List<Vaccine> vaccines = vaccineRepo.findVaccineByName(vaccineName, key);
+			if (vaccines.size() != 0) {
+				return vaccines;
+			} else {
+				throw new VaccineException("Vaccine not found with vaccine name - " + vaccineName);
 			}
-			
-			return vc;
+		} else
+			throw new LoginException("Oops...! Login as a user/Admin first.");
 	}
 
 	@Override
-	public Vaccine updateVaccine(Vaccine vaccine) throws VaccineException {
-		Optional<Vaccine> vc=vr.findById(vaccine.getVaccineId());
-				if(vc!=null) {
-					vr.save(vaccine);
-				}else {
-				throw new VaccineException("No vaccine Present With this "+vaccine.getVaccineId());
+	public Vaccine getVaccineById(Integer vaccineId, String key) throws VaccineException, LoginException {
+
+		CurrentAdminSession currentSessionAdmin = adminRepo.findByUniqueUserId(key);
+
+		CurrentUserSession currentSessionUser = userRepo.findByUniqueUserId(key);
+
+		if (currentSessionAdmin != null || currentSessionUser != null) {
+
+			Optional<Vaccine> opt = vaccineRepo.findById(vaccineId);
+			if (opt.isPresent()) {
+				Vaccine vaccine = opt.get();
+				return vaccine;
+			} else {
+				throw new VaccineException("Vaccine not found with vaccine id - " + vaccineId);
+			}
+		} else
+			throw new LoginException("Oops...! Login as a user/Admin first.");
+	}
+
+	@Override
+	public Vaccine addVaccine(Vaccine vaccine, String key) throws VaccineException, LoginException {
+		CurrentAdminSession currentSessionAdmin = adminRepo.findByUniqueUserId(key);
+
+		CurrentUserSession currentSessionUser = userRepo.findByUniqueUserId(key);
+
+		if (currentSessionAdmin != null || currentSessionUser != null) {
+
+			Vaccine vacc = vaccineRepo.save(vaccine);
+			if (vacc != null) {
+				return vacc;
+			} else {
+				throw new VaccineException("Vaccine not added");
+			}
+		} else
+			throw new LoginException("Oops...! Login as a user/Admin first.");
+
+	}
+
+	@Override
+	public Vaccine updateVaccine(Vaccine vaccine, String key) throws VaccineException, LoginException {
+
+		CurrentAdminSession currentSessionAdmin = adminRepo.findByUniqueUserId(key);
+
+		CurrentUserSession currentSessionUser = userRepo.findByUniqueUserId(key);
+
+		if (currentSessionAdmin != null || currentSessionUser != null) {
+
+			Optional<Vaccine> opt = vaccineRepo.findById(vaccine.getVaccineId());
+			if (opt.isPresent()) {
+				Vaccine updatedVaccine = vaccineRepo.save(vaccine);
+				return updatedVaccine;
+			} else {
+				throw new VaccineException("Vaccine not found ");
+			}
+		} else
+			throw new LoginException("Oops...! Login as a user/Admin first.");
+
+	}
+
+	@Override
+	public Boolean deleteVaccine(Integer vaccineId, String key) throws VaccineException, LoginException {
+
+		CurrentAdminSession currentSessionAdmin = adminRepo.findByUniqueUserId(key);
+
+		CurrentUserSession currentSessionUser = userRepo.findByUniqueUserId(key);
+
+		if (currentSessionAdmin != null || currentSessionUser != null) {
+
+			boolean ans = false;
+			Optional<Vaccine> opt = vaccineRepo.findById(vaccineId);
+			if (opt.isPresent()) {
+				Vaccine v = opt.get();
+				if (v.getVaccineInventory().getVaccineCount().getQuantity() == 0) {
+					vaccineRepo.delete(v);
+					ans = true;
+
 				}
-		
-		
-		return vr.save(vaccine);
+
+			} else {
+				throw new VaccineException("Vaccine not found ");
+			}
+			return ans;
+		} else
+			throw new LoginException("Oops...! Login as a user/Admin first.");
 	}
 
-	@Override
-	public Boolean deleteVaccine(Vaccine vaccine) throws VaccineException {
-		Optional<Vaccine> op = vr.findById(vaccine.getVaccineId());
-		if(op.isPresent())
-		{
-			vr.deleteById(vaccine.getVaccineId());
-			return true;
-		}
-		throw new VaccineException("Unable to Delete");
-		
-	
-	}
 
 }

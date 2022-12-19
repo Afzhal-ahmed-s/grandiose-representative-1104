@@ -15,5 +15,7 @@ public interface VaccineInventoryRepo extends JpaRepository<VaccineInventory, In
 	public List<VaccineInventory> findBydate(LocalDate date);
 	
 	
-	//public VaccineInventory  findByCode(Integer code);
+	@Query("select vaccineInventory from Vaccine v where v.vaccineId=?1")
+	public VaccineInventory getVaccineInventoryByVaccine(Integer vaccineId);
+	
 }
