@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
+//@Entity
 public class VaccineCount {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer vaccinecountid;
 	private Integer quantity;
 	private Double price;

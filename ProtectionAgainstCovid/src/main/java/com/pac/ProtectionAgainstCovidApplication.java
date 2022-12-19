@@ -15,7 +15,7 @@ public class ProtectionAgainstCovidApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ProtectionAgainstCovidApplication.class, args);
 		
-		System.out.println("It's working BAY BAY!");
+		System.out.println("It's working!");
 	}
 
 	//for validation msg
