@@ -52,10 +52,10 @@ public class VaccineRegistrationController {
 		      return new ResponseEntity<VaccineRegistration>(registrationService.addVaccineRegistration(registration,key), HttpStatus.OK);
 	   }
 	  
-	  @GetMapping("/registrations/{mobileNumber}")
-	  public ResponseEntity<VaccineRegistration> getVaccineRegistration( @PathVariable("mobileNumber") Long mobileNumber,@RequestParam String key) throws VaccineRegistrationException, MemberException, AdminLoginException{
+	  @GetMapping("/registrations/{id}/{key}")
+	  public ResponseEntity<VaccineRegistration> getVaccineRegistration( @PathVariable("id") Integer id,@RequestParam String key) throws VaccineRegistrationException, MemberException, AdminLoginException{
 		  
-		    return new ResponseEntity<VaccineRegistration>(registrationService.getVaccineRegistration(mobileNumber,key),HttpStatus.OK);
+		    return new ResponseEntity<VaccineRegistration>(registrationService.getVaccineRegistration(id,key),HttpStatus.OK);
 	  }
 	  
 	  @PutMapping("/registration")
@@ -67,9 +67,7 @@ public class VaccineRegistrationController {
 	  @DeleteMapping("/registration")
 	  public boolean DeleteRegistraion( @RequestBody VaccineRegistration registration,@RequestParam String key) throws VaccineRegistrationException, MemberException{
 		        
-		      boolean x= registrationService.deleteVaccineRegistration(registration,key);
-		              
-		               
+		      boolean x= registrationService.deleteVaccineRegistration(registration.getRegistrationNo(), key);
 		      return x;
 	  }
 	

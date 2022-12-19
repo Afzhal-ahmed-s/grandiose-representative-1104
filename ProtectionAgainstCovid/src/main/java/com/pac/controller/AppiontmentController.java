@@ -28,7 +28,7 @@ import com.pac.service.MemberService;
 import com.pac.serviceImplementation.AdminServiceImplementation;
 
 @RestController
-@RequestMapping("/Appiontment")
+@RequestMapping("/Appointment")
 public class AppiontmentController {
 	
 	@Autowired

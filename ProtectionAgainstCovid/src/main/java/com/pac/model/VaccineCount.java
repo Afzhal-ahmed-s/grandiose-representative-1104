@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 
+public class VaccineCount{
+
 	private Integer vaccinecountid;
 
 	private Integer quantity;
