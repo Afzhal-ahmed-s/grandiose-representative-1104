@@ -32,6 +32,9 @@ import lombok.ToString;
 public class VaccineRegistration {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer registrationNo;
+	
 	private Long mobileNo;
 	@NotNull(message = "{notnull.mesage}")
 	private LocalDate dateOfRegsitration;
@@ -42,8 +45,8 @@ public class VaccineRegistration {
 //	private List<Member>members;
 	
 	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Member> members;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Member members;
 
 
 

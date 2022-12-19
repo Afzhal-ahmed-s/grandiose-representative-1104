@@ -31,7 +31,7 @@ public class Vaccine {
 	private String description;;
 
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Member member;
 	
 	@JsonIgnore
