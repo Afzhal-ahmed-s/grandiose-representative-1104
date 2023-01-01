@@ -4,7 +4,8 @@
 
 
 ## ER-Diagram
-![ER_diagram](https://user-images.githubusercontent.com/96117548/208404656-8473c0c5-da53-4021-99b8-c7cc8829658f.jpg)
+<img width="832" alt="Screenshot 2022-12-20 at 12 17 05 PM" src="https://user-images.githubusercontent.com/96117548/210172552-625fa43d-fbac-480f-a090-ef9c319b79db.png">
+
 
 # REST API for Protection against Covid Application
 
