@@ -53,7 +53,7 @@
 
 ## Installation & Run
 
-* Before running the API server, you should update the database config inside the [application.properties](https://github.com/suraj-996/lying-powder-9405/blob/main/Covid-19-VaccineScheduler/src/main/resources/application.properties) file. 
+* Before running the API server, you should update the database config inside the [application.properties](https://github.com/Afzhal-ahmed-s/grandiose-representative-1104/blob/main/protection%20aginst%20covid%20v2/src/main/resources/application.properties) file. 
 * Update the port number, username and password as per your local database config.
 
 ```
