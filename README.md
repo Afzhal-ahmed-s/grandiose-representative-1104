@@ -4,7 +4,8 @@
 
 
 ## ER-Diagram
-![ER_diagram](https://user-images.githubusercontent.com/96117548/208404656-8473c0c5-da53-4021-99b8-c7cc8829658f.jpg)
+<img width="832" alt="Screenshot 2022-12-20 at 12 17 05 PM" src="https://user-images.githubusercontent.com/96117548/210172552-625fa43d-fbac-480f-a090-ef9c319b79db.png">
+
 
 # REST API for Protection against Covid Application
 
@@ -52,7 +53,7 @@
 
 ## Installation & Run
 
-* Before running the API server, you should update the database config inside the [application.properties](https://github.com/suraj-996/lying-powder-9405/blob/main/Covid-19-VaccineScheduler/src/main/resources/application.properties) file. 
+* Before running the API server, you should update the database config inside the [application.properties](https://github.com/Afzhal-ahmed-s/grandiose-representative-1104/blob/main/protection%20aginst%20covid%20v2/src/main/resources/application.properties) file. 
 * Update the port number, username and password as per your local database config.
 
 ```
