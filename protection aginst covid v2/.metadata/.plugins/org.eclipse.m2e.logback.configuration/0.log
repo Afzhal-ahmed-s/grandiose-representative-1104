@@ -8,3 +8,4 @@
 2022-12-20 11:56:59,339 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2022-12-20 11:56:59,339 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
 2022-12-20 11:56:59,339 [Worker-12: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /Users/afzhalahmed/Documents/GitHub/grandiose-representative-1104/ProtectionAgainstCovid/src/test/resources
+2023-01-07 15:02:38,918 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
